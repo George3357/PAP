@@ -1,0 +1,59 @@
+// Admin Access Helper
+document.addEventListener('DOMContentLoaded', function() {
+    // Add admin access button to footer for easy access during development
+    const footerBottom = document.querySelector('.footer-bottom');
+    
+    if (footerBottom) {
+        const adminAccessDiv = document.createElement('div');
+        adminAccessDiv.style.marginTop = '20px';
+        adminAccessDiv.style.textAlign = 'center';
+        adminAccessDiv.innerHTML = `
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                <h3 style="margin-top: 0; margin-bottom: 10px; font-size: 16px;">Acesso Rápido ao Painel Admin</h3>
+                <p style="margin-bottom: 15px; font-size: 14px;">
+                    Use as credenciais: <strong>admin@cardealz.com</strong> / <strong>admin123</strong>
+                </p>
+                <button id="quick-admin-login" style="background-color: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                    Entrar como Admin
+                </button>
+            </div>
+        `;
+        
+        footerBottom.appendChild(adminAccessDiv);
+        
+        // Add event listener to the quick admin login button
+        const quickAdminLoginBtn = document.getElementById('quick-admin-login');
+        if (quickAdminLoginBtn) {
+            quickAdminLoginBtn.addEventListener('click', function() {
+                // Create admin user if it doesn't exist
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const adminExists = users.some(user => user.role === 'admin');
+                
+                if (!adminExists) {
+                    // Create admin user
+                    const adminUser = {
+                        id: Date.now(),
+                        name: 'Administrador',
+                        email: 'admin@cardealz.com',
+                        password: 'admin123',
+                        role: 'admin',
+                        createdAt: new Date().toISOString()
+                    };
+                    
+                    // Add admin to users array
+                    users.push(adminUser);
+                    
+                    // Save users to localStorage
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+                
+                // Log in as admin
+                const adminUser = users.find(user => user.role === 'admin');
+                if (adminUser) {
+                    localStorage.setItem('currentUser', JSON.stringify(adminUser));
+                    window.location.href = 'admin.html';
+                }
+            });
+        }
+    }
+});

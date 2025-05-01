@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CarDealz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/theme-dark.css">
+    <style>
+        /* Auth Styles */
+        .auth-section {
+            padding: 60px 0;
+            background-color: var(--bg-color);
+        }
+        
+        .auth-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .auth-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-header h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .auth-header p {
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+        
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .auth-form .form-actions {
+            margin-top: 30px;
+        }
+        
+        .auth-form .form-actions .btn {
+            width: 100%;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-light);
+        }
+        
+        .auth-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .social-login p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+            position: relative;
+        }
+        
+        .social-login p::before,
+        .social-login p::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+        
+        .social-login p::before {
+            left: 0;
+        }
+        
+        .social-login p::after {
+            right: 0;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+        
+        .social-button:hover {
+            transform: translateY(-3px);
+        }
+        
+        .social-button.facebook:hover {
+            background-color: #3b5998;
+            color: white;
+        }
+        
+        .social-button.google:hover {
+            background-color: #db4437;
+            color: white;
+        }
+        
+        .social-button.apple:hover {
+            background-color: #000;
+            color: white;
+        }
+        
+        /* Admin Quick Login */
+        .admin-quick-login {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-color);
+        }
+        
+        .admin-quick-login h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            font-size: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <span>Car</span>Dealz
+                    </a>
+                </div>
+                <nav class="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="cars.html">Carros</a></li>
+                        <li><a href="about.html">Sobre</a></li>
+                        <li><a href="contact.html">Contato</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-actions">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="register.html" class="btn btn-primary">Registrar</a>
+                    <button class="mobile-menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Auth Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1>Login</h1>
+                        <p>Entre com sua conta para continuar</p>
+                    </div>
+                    
+                    <form class="auth-form" id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" class="form-input" placeholder="Seu email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password">Senha</label>
+                            <input type="password" id="login-password" class="form-input" placeholder="Sua senha" required>
+                        </div>
+                        
+                        <div class="form-group form-checkbox">
+                            <input type="checkbox" id="remember-me">
+                            <label for="remember-me">Lembrar de mim</label>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                        </div>
+                    </form>
+                    
+                    <div class="social-login">
+                        <p>Ou entre com</p>
+                        <div class="social-buttons">
+                            <a href="#" class="social-button facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-button google">
+                                <i class="fab fa-google"></i>
+                            </a>
+                            <a href="#" class="social-button apple">
+                                <i class="fab fa-apple"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin Quick Login -->
+                    <div class="admin-quick-login">
+                        <h3>Acesso Rápido para Administrador</h3>
+                        <button id="admin-login-btn" class="btn btn-outline">Entrar como Admin</button>
+                    </div>
+                </div>
+                
+                <div class="auth-footer">
+                    <p>Não tem uma conta? <a href="register.html">Registre-se</a></p>
+                    <p><a href="#">Esqueceu sua senha?</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span>Car</span>Dealz
+                        </a>
+                    </div>
+                    <p>Oferecemos os melhores carros do mercado com preços competitivos e atendimento de qualidade.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="cars.html">Carros</a></li>
+                        <li><a href="about.html">Sobre</a></li>
+                        <li><a href="contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Suporte</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:contato@cardealz.com">contato@cardealz.com</a></p>
+                    <p><i class="fas fa-phone"></i> Telefone: +1 212 555 1234</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Endereço: 5th Avenue, New York City</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 CarDealz. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Admin quick login button
+            const adminLoginBtn = document.getElementById('admin-login-btn');
+            if (adminLoginBtn) {
+                adminLoginBtn.addEventListener('click', function() {
+                    // Fill login form with admin credentials
+                    document.getElementById('login-email').value = 'admin@cardealz.com';
+                    document.getElementById('login-password').value = 'admin123';
+                    
+                    // Submit the form
+                    document.getElementById('login-form').dispatchEvent(new Event('submit'));
+                });
+            }
+            
+            // Check if we need to create an admin user
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const adminExists = users.some(user => user.role === 'admin');
+            
+            if (!adminExists) {
+                // Create admin user
+                const adminUser = {
+                    id: Date.now(),
+                    name: 'Administrador',
+                    email: 'admin@cardealz.com',
+                    password: 'admin123',
+                    role: 'admin',
+                    createdAt: new Date().toISOString()
+                };
+                
+                // Add admin to users array
+                users.push(adminUser);
+                
+                // Save users to localStorage
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                console.log('Admin user created:', adminUser);
+            }
+        });
+    </script>
+</body>
+</html>

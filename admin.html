@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administração - CarDealz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/theme-dark.css">
+    <style>
+        /* Admin Styles */
+        .admin-section {
+            padding: 60px 0;
+            background-color: var(--bg-color);
+        }
+        
+        .admin-header {
+            margin-bottom: 30px;
+        }
+        
+        .admin-header h1 {
+            margin: 0 0 10px;
+            color: var(--text-dark);
+        }
+        
+        .admin-header p {
+            color: var(--text-light);
+        }
+        
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .admin-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            transition: var(--transition);
+        }
+        
+        .admin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .admin-card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .admin-card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background-color: var(--bg-light);
+            padding: 40px 0;
+            margin-bottom: 0;
+        }
+        
+        .page-header h1 {
+            margin: 0 0 10px;
+            color: var(--text-dark);
+        }
+        
+        .breadcrumbs {
+            color: var(--text-light);
+        }
+        
+        .breadcrumbs a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <span>Car</span>Dealz
+                    </a>
+                </div>
+                <nav class="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="cars.html">Carros</a></li>
+                        <li><a href="about.html">Sobre</a></li>
+                        <li><a href="contact.html">Contato</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-actions">
+                    <!-- This will be replaced by auth.js -->
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="register.html" class="btn btn-primary">Registrar</a>
+                    <button class="mobile-menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Painel de Administração</h1>
+            <div class="breadcrumbs">
+                <a href="index.html">Início</a> / <span>Admin</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Section -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-header">
+                <h1>Bem-vindo ao Painel de Administração</h1>
+                <p>Gerencie todos os aspectos do seu site de concessionária de carros.</p>
+            </div>
+            
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <div class="admin-card-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Gerenciar Carros</h3>
+                    <p>Adicione, edite ou remova carros do seu inventário.</p>
+                    <a href="admin-cars.html" class="btn btn-primary">Acessar</a>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-card-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3>Gerenciar Imagens</h3>
+                    <p>Faça upload, organize e gerencie imagens do site.</p>
+                    <a href="admin-images.html" class="btn btn-primary">Acessar</a>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Gerenciar Usuários</h3>
+                    <p>Administre contas de usuários e permissões.</p>
+                    <a href="admin-users.html" class="btn btn-primary">Acessar</a>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-card-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Gerenciar Pedidos</h3>
+                    <p>Visualize e gerencie pedidos de clientes.</p>
+                    <a href="admin-orders.html" class="btn btn-primary">Acessar</a>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-card-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Configurações do Site</h3>
+                    <p>Personalize as configurações gerais do site.</p>
+                    <a href="admin-settings.html" class="btn btn-primary">Acessar</a>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Estatísticas</h3>
+                    <p>Visualize relatórios e estatísticas do site.</p>
+                    <a href="admin-stats.html" class="btn btn-primary">Acessar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <a href="index.html">
+                            <span>Car</span>Dealz
+                        </a>
+                    </div>
+                    <p>Oferecemos os melhores carros do mercado com preços competitivos e atendimento de qualidade.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="cars.html">Carros</a></li>
+                        <li><a href="about.html">Sobre</a></li>
+                        <li><a href="contact.html">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Suporte</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:contato@cardealz.com">contato@cardealz.com</a></p>
+                    <p><i class="fas fa-phone"></i> Telefone: +1 212 555 1234</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Endereço: 5th Avenue, New York City</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 CarDealz. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is admin
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser || currentUser.role !== 'admin') {
+                window.location.href = 'login.html?redirect=admin.html';
+            }
+        });
+    </script>
+</body>
+</html>

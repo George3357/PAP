@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - CarDealz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme-dark.css">
+    <style>
+        /* Logo Styling */
+        .logo a {
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+        
+        .logo a span {
+            color: var(--text-dark);
+        }
+        
+        .logo a span + span {
+            color: #2196f3;
+        }
+        
+        /* Contact Page Styles */
+        .contact-hero {
+            position: relative;
+            height: 400px;
+            background-color: #000;
+            overflow: hidden;
+        }
+        
+        .contact-hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+        
+        .contact-hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            width: 80%;
+            max-width: 800px;
+        }
+        
+        .contact-hero-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .contact-hero-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .contact-section {
+            padding: 80px 0;
+            background-color: var(--bg-color);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-form-container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-form-container h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .contact-form-container p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+        }
+        
+        .contact-info {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-info h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-info-icon i {
+            font-size: 20px;
+        }
+        
+        .contact-info-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+        
+        .contact-info-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .contact-info-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-info-content a:hover {
+            text-decoration: underline;
+        }
+        
+        .business-hours {
+            margin-top: 40px;
+        }
+        
+        .business-hours h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .hours-item:last-child {
+            border-bottom: none;
+        }
+        
+        .hours-day {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .hours-time {
+            color: var(--text-light);
+        }
+        
+        .social-links-contact {
+            margin-top: 30px;
+        }
+        
+        .social-links-contact h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-hover);
+            color: var(--text-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .map-section {
+            padding: 80px 0;
+            background-color: var(--card-bg);
+        }
+        
+        .map-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .map-heading h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .map-heading p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .map-container {
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .message-success {
+            display: none;
+            padding: 15px;
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-hero {
+                height: 300px;
+            }
+            
+            .contact-hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .contact-hero-content p {
+                font-size: 16px;
+            }
+            
+            .contact-form-container,
+            .contact-info {
+                padding: 30px;
+            }
+            
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <span>Car</span><span>Dealz</span>
+                </a>
+            </div>
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="cars.html">Supercarros</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html" class="active">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <!-- This will be replaced by auth.js -->
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Registrar</a>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="contact-hero">
+    <img src="/placeholder.svg?height=400&width=1200" alt="Contact Us" class="contact-hero-image">
+    <div class="contact-hero-content">
+        <h1>Entre em Contato</h1>
+        <p>Estamos à disposição para atender suas necessidades e responder suas dúvidas sobre nossos supercarros exclusivos.</p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-form-container">
+                <h2>Envie-nos uma Mensagem</h2>
+                <p>Preencha o formulário abaixo e nossa equipe entrará em contato o mais breve possível.</p>
+                
+                <div id="messageSuccess" class="message-success">
+                    <i class="fas fa-check-circle"></i> Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.
+                </div>
+                
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Assunto</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Selecione um assunto</option>
+                            <option value="Informações sobre veículos">Informações sobre veículos</option>
+                            <option value="Agendamento de test drive">Agendamento de test drive</option>
+                            <option value="Financiamento">Financiamento</option>
+                            <option value="Serviços pós-venda">Serviços pós-venda</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Enviar Mensagem</button>
+                </form>
+            </div>
+            
+            <div class="contact-info">
+                <h2>Informações de Contato</h2>
+                
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-info-content">
+                        <h3>Endereço</h3>
+                        <p>5th Avenue, New York City<br>NY 10022, Estados Unidos</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-info-content">
+                        <h3>Telefone</h3>
+                        <p>
+                            <a href="tel:+12125551234">+1 212 555 1234</a><br>
+                            <a href="tel:+12125555678">+1 212 555 5678</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-info-content">
+                        <h3>Email</h3>
+                        <p>
+                            <a href="mailto:info@cardealz.com">info@cardealz.com</a><br>
+                            <a href="mailto:sales@cardealz.com">sales@cardealz.com</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="business-hours">
+                    <h3>Horário de Funcionamento</h3>
+                    <div class="hours-grid">
+                        <div class="hours-item">
+                            <span class="hours-day">Segunda-feira</span>
+                            <span class="hours-time">9:00 - 18:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="hours-day">Terça-feira</span>
+                            <span class="hours-time">9:00 - 18:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="hours-day">Quarta-feira</span>
+                            <span class="hours-time">9:00 - 18:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="hours-day">Quinta-feira</span>
+                            <span class="hours-time">9:00 - 18:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="hours-day">Sexta-feira</span>
+                            <span class="hours-time">9:00 - 18:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="hours-day">Sábado</span>
+                            <span class="hours-time">10:00 - 16:00</span>
+                        </div>
+                        <div class="hours-item">
+                            <span class="hours-day">Domingo</span>
+                            <span class="hours-time">Fechado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="social-links-contact">
+                    <h3>Redes Sociais</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="map-section">
+    <div class="container">
+        <div class="map-heading">
+            <h2>Visite Nosso Showroom</h2>
+            <p>Venha conhecer pessoalmente nossa coleção exclusiva de supercarros e hipercars.</p>
+        </div>
+        
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215256349542!2d-73.97686192346177!3d40.76172937138728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258e4a1c884e5%3A0x24fe1071086b36d5!2sThe%20Carlyle%2C%20A%20Rosewood%20Hotel!5e0!3m2!1sen!2sus!4v1699355248010!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="logo">
+                    <a href="index.html">
+                        <span>Car</span><span>Dealz</span>
+                    </a>
+                </div>
+                <p>Oferecemos os mais exclusivos supercarros e hipercars do mercado com atendimento personalizado e serviço premium.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="cars.html">Supercarros</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Suporte</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p><i class="fas fa-envelope"></i> Email: info@cardealz.com</p>
+                <p><i class="fas fa-phone"></i> Telefone: +1 212 555 1234</p>
+                <p><i class="fas fa-map-marker-alt"></i> Endereço: 5th Avenue, New York City</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 CarDealz. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.getElementById('contactForm');
+        const messageSuccess = document.getElementById('messageSuccess');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real application, you would send the form data to a server
+            // For this demo, we'll just simulate a successful submission
+            
+            // Show success message
+            messageSuccess.style.display = 'block';
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(function() {
+                messageSuccess.style.display = 'none';
+            }, 5000);
+        });
+    });
+</script>
+</body>
+</html>

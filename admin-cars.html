@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Edit Cars - CarDealz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme-dark.css">
+    <style>
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .admin-nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .car-selector {
+            margin-bottom: 30px;
+        }
+        
+        .car-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        
+        .price-input-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .price-input-group span {
+            padding: 10px 15px;
+            background-color: var(--bg-hover);
+            border: 1px solid var(--border-color);
+            border-right: none;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            color: var(--text-color);
+        }
+        
+        .price-input-group input {
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .feature-tag {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            background-color: var(--bg-hover);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .feature-tag .remove-feature {
+            cursor: pointer;
+            color: var(--danger-color);
+        }
+        
+        .add-feature {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .add-feature input {
+            flex: 1;
+        }
+        
+        .message {
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .message.success {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        
+        .message.error {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        .car-preview {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--bg-hover);
+            border-radius: 8px;
+        }
+        
+        .car-preview h3 {
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+        
+        .preview-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .preview-details h4 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+        
+        .preview-details .price {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .preview-details .specs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .preview-details .spec {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+        
+        .preview-details .description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+        
+        .preview-details .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .preview-details .feature {
+            padding: 3px 8px;
+            background-color: var(--card-bg);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text-color);
+        }
+        
+        .currency-info {
+            margin-top: 5px;
+            font-size: 12px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Car Details</h1>
+        
+        <div class="admin-nav">
+            <a href="admin-images.html" class="btn btn-outline">Manage Images</a>
+            <a href="reset-database.html" class="btn btn-outline">Reset Database</a>
+            <a href="cars.html" class="btn btn-outline">View Cars</a>
+        </div>
+        
+        <div id="message" style="display: none;"></div>
+        
+        <div class="car-selector">
+            <label for="carSelect">Select Car to Edit:</label>
+            <select id="carSelect" class="form-control">
+                <option value="">-- Select a car --</option>
+                <!-- Cars will be loaded here -->
+            </select>
+        </div>
+        
+        <form id="carForm" style="display: none;">
+            <div class="car-form">
+                <div class="form-group">
+                    <label for="brand">Brand:</label>
+                    <input type="text" id="brand" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="model">Model:</label>
+                    <input type="text" id="model" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" min="1900" max="2030" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="price">Price (in EUR):</label>
+                    <div class="price-input-group">
+                        <span>€</span>
+                        <input type="number" id="price" min="0" step="100" required>
+                    </div>
+                    <div class="currency-info">Prices are stored in BRL but displayed and edited in EUR (1 EUR ≈ 5.5 BRL)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mileage">Mileage (km):</label>
+                    <input type="number" id="mileage" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fuel">Fuel Type:</label>
+                    <select id="fuel" required>
+                        <option value="Gasolina">Gasolina</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Elétrico">Elétrico</option>
+                        <option value="Híbrido">Híbrido</option>
+                        <option value="Flex">Flex</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="transmission">Transmission:</label>
+                    <select id="transmission" required>
+                        <option value="Automático">Automático</option>
+                        <option value="Manual">Manual</option>
+                        <option value="Semi-automático">Semi-automático</option>
+                        <option value="PDK">PDK</option>
+                        <option value="DCT">DCT</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="color">Color:</label>
+                    <input type="text" id="color" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select id="status" required>
+                        <option value="new">New</option>
+                        <option value="used">Used</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="featured">Featured:</label>
+                    <select id="featured" required>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="description">Description:</label>
+                    <textarea id="description" required></textarea>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label>Features:</label>
+                    <div id="featuresContainer" class="features-container">
+                        <!-- Features will be added here -->
+                    </div>
+                    <div class="add-feature">
+                        <input type="text" id="newFeature" placeholder="Add a new feature">
+                        <button type="button" id="addFeatureBtn" class="btn btn-outline">Add</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="button" id="previewBtn" class="btn btn-outline">Preview Changes</button>
+            </div>
+        </form>
+        
+        <div id="carPreview" class="car-preview" style="display: none;">
+            <!-- Preview will be shown here -->
+        </div>
+    </div>
+    
+    <script src="js/cars.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carSelect = document.getElementById('carSelect');
+            const carForm = document.getElementById('carForm');
+            const brandInput = document.getElementById('brand');
+            const modelInput = document.getElementById('model');
+            const yearInput = document.getElementById('year');
+            const priceInput = document.getElementById('price');
+            const mileageInput = document.getElementById('mileage');
+            const fuelInput = document.getElementById('fuel');
+            const transmissionInput = document.getElementById('transmission');
+            const colorInput = document.getElementById('color');
+            const statusInput = document.getElementById('status');
+            const featuredInput = document.getElementById('featured');
+            const descriptionInput = document.getElementById('description');
+            const featuresContainer = document.getElementById('featuresContainer');
+            const newFeatureInput = document.getElementById('newFeature');
+            const addFeatureBtn = document.getElementById('addFeatureBtn');
+            const previewBtn = document.getElementById('previewBtn');
+            const carPreview = document.getElementById('carPreview');
+            const messageDiv = document.getElementById('message');
+            
+            // Track current car features
+            let currentFeatures = [];
+            let currentCarId = null;
+            
+            // Exchange rate: 1 EUR = 5.5 BRL
+            const exchangeRate = 5.5;
+            
+            // Convert BRL to EUR
+            function brlToEur(brlPrice) {
+                return Math.round(brlPrice / exchangeRate);
+            }
+            
+            // Convert EUR to BRL
+            function eurToBrl(eurPrice) {
+                return Math.round(eurPrice * exchangeRate);
+            }
+            
+            // Load cars into select dropdown
+            const cars = getAllCars();
+            cars.forEach(car => {
+                const option = document.createElement('option');
+                option.value = car.id;
+                option.textContent = `${car.brand} ${car.model} (${car.year})`;
+                carSelect.appendChild(option);
+            });
+            
+            // Handle car selection
+            carSelect.addEventListener('change', function() {
+                const carId = parseInt(this.value);
+                if (carId) {
+                    const car = getCarById(carId);
+                    if (car) {
+                        // Store current car ID
+                        currentCarId = car.id;
+                        
+                        // Fill form with car details
+                        brandInput.value = car.brand;
+                        modelInput.value = car.model;
+                        yearInput.value = car.year;
+                        // Convert price from BRL to EUR
+                        priceInput.value = brlToEur(car.price);
+                        mileageInput.value = car.mileage;
+                        fuelInput.value = car.fuel;
+                        transmissionInput.value = car.transmission;
+                        colorInput.value = car.color;
+                        statusInput.value = car.status;
+                        featuredInput.value = car.featured.toString();
+                        descriptionInput.value = car.description;
+                        
+                        // Load features
+                        currentFeatures = [...car.features];
+                        updateFeaturesDisplay();
+                        
+                        // Show form
+                        carForm.style.display = 'block';
+                        carPreview.style.display = 'none';
+                    }
+                } else {
+                    // Hide form if no car selected
+                    carForm.style.display = 'none';
+                    carPreview.style.display = 'none';
+                    currentCarId = null;
+                }
+            });
+            
+            // Handle adding features
+            addFeatureBtn.addEventListener('click', function() {
+                const feature = newFeatureInput.value.trim();
+                if (feature) {
+                    currentFeatures.push(feature);
+                    updateFeaturesDisplay();
+                    newFeatureInput.value = '';
+                }
+            });
+            
+            // Handle Enter key in new feature input
+            newFeatureInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addFeatureBtn.click();
+                }
+            });
+            
+            // Update features display
+            function updateFeaturesDisplay() {
+                featuresContainer.innerHTML = '';
+                
+                currentFeatures.forEach((feature, index) => {
+                    const featureTag = document.createElement('div');
+                    featureTag.className = 'feature-tag';
+                    featureTag.innerHTML = `
+                        <span>${feature}</span>
+                        <span class="remove-feature" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </span>
+                    `;
+                    featuresContainer.appendChild(featureTag);
+                });
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-feature').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.dataset.index);
+                        currentFeatures.splice(index, 1);
+                        updateFeaturesDisplay();
+                    });
+                });
+            }
+            
+            // Handle preview button
+            previewBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const eurPrice = parseInt(priceInput.value);
+                const brlPrice = eurToBrl(eurPrice);
+                
+                const carData = {
+                    brand: brandInput.value,
+                    model: modelInput.value,
+                    year: parseInt(yearInput.value),
+                    price: brlPrice, // Store as BRL
+                    mileage: parseInt(mileageInput.value),
+                    fuel: fuelInput.value,
+                    transmission: transmissionInput.value,
+                    color: colorInput.value,
+                    status: statusInput.value,
+                    featured: featuredInput.value === 'true',
+                    description: descriptionInput.value,
+                    features: currentFeatures
+                };
+                
+                // Get current car for images
+                const currentCar = getCarById(currentCarId);
+                
+                // Format price in EUR
+                const formattedEurPrice = new Intl.NumberFormat('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR'
+                }).format(eurPrice);
+                
+                // Show preview
+                carPreview.innerHTML = `
+                    <h3>Preview</h3>
+                    <div class="preview-grid">
+                        <img src="${currentCar.images[0]}" class="preview-image" alt="${carData.brand} ${carData.model}" onerror="this.src='/placeholder.svg?height=200&width=300'">
+                        
+                        <div class="preview-details">
+                            <h4>${carData.brand} ${carData.model}</h4>
+                            <div class="price">${formattedEurPrice}</div>
+                            
+                            <div class="specs">
+                                <div class="spec">
+                                    <i class="fas fa-calendar"></i> ${carData.year}
+                                </div>
+                                <div class="spec">
+                                    <i class="fas fa-tachometer-alt"></i> ${carData.mileage.toLocaleString('pt-BR')} km
+                                </div>
+                                <div class="spec">
+                                    <i class="fas fa-gas-pump"></i> ${carData.fuel}
+                                </div>
+                                <div class="spec">
+                                    <i class="fas fa-car"></i> ${carData.transmission}
+                                </div>
+                            </div>
+                            
+                            <div class="description">${carData.description}</div>
+                            
+                            <div class="features">
+                                ${carData.features.map(feature => `
+                                    <div class="feature">${feature}</div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                carPreview.style.display = 'block';
+            });
+            
+            // Handle form submission
+            carForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!currentCarId) {
+                    showMessage('No car selected', 'error');
+                    return;
+                }
+                
+                // Get form data and convert EUR to BRL for storage
+                const eurPrice = parseInt(priceInput.value);
+                const brlPrice = eurToBrl(eurPrice);
+                
+                const updatedCar = {
+                    id: currentCarId,
+                    brand: brandInput.value,
+                    model: modelInput.value,
+                    year: parseInt(yearInput.value),
+                    price: brlPrice, // Store as BRL
+                    mileage: parseInt(mileageInput.value),
+                    fuel: fuelInput.value,
+                    transmission: transmissionInput.value,
+                    color: colorInput.value,
+                    status: statusInput.value,
+                    featured: featuredInput.value === 'true',
+                    description: descriptionInput.value,
+                    features: currentFeatures
+                };
+                
+                // Get current car for images
+                const currentCar = getCarById(currentCarId);
+                updatedCar.images = currentCar.images;
+                
+                // Update car
+                if (updateCar(updatedCar)) {
+                    showMessage('Car updated successfully!', 'success');
+                    
+                    // Update select option text
+                    const option = carSelect.querySelector(`option[value="${currentCarId}"]`);
+                    if (option) {
+                        option.textContent = `${updatedCar.brand} ${updatedCar.model} (${updatedCar.year})`;
+                    }
+                } else {
+                    showMessage('Error updating car', 'error');
+                }
+            });
+            
+            // Function to update car
+            function updateCar(updatedCar) {
+                // Get all cars
+                const cars = JSON.parse(localStorage.getItem('carDatabase')) || [];
+                
+                // Find the car by ID
+                const carIndex = cars.findIndex(car => car.id === updatedCar.id);
+                
+                if (carIndex !== -1) {
+                    // Update the car
+                    cars[carIndex] = updatedCar;
+                    
+                    // Save back to localStorage
+                    localStorage.setItem('carDatabase', JSON.stringify(cars));
+                    
+                    return true;
+                }
+                
+                return false;
+            }
+            
+            // Function to show messages
+            function showMessage(text, type) {
+                messageDiv.textContent = text;
+                messageDiv.className = `message ${type}`;
+                messageDiv.style.display = 'block';
+                
+                // Hide message after 3 seconds
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

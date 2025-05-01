@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Car Database - CarDealz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .log {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            font-family: monospace;
+            height: 300px;
+            overflow-y: auto;
+        }
+        
+        .log p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .log .success {
+            color: green;
+        }
+        
+        .log .error {
+            color: red;
+        }
+        
+        .log .info {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reset Car Database</h1>
+        <p>Use this utility to reset the car database and ensure the luxury cars are properly loaded.</p>
+        
+        <div class="actions">
+            <button id="resetBtn" class="btn btn-danger">Reset Database</button>
+            <button id="checkBtn" class="btn btn-primary">Check Database</button>
+            <a href="cars.html" class="btn btn-outline">View Cars</a>
+        </div>
+        
+        <div class="log" id="log">
+            <p>Ready to perform database operations...</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logElement = document.getElementById('log');
+            const resetBtn = document.getElementById('resetBtn');
+            const checkBtn = document.getElementById('checkBtn');
+            
+            // Function to add log entry
+            function addLog(message, type = 'info') {
+                const logEntry = document.createElement('p');
+                logEntry.textContent = message;
+                logEntry.classList.add(type);
+                logElement.appendChild(logEntry);
+                logElement.scrollTop = logElement.scrollHeight;
+            }
+            
+            // Function to format price in Euro
+            function formatPrice(price) {
+                // Convert BRL to EUR (approximate exchange rate: 1 EUR = 5.5 BRL)
+                const euroPrice = price / 5.5;
+                
+                return euroPrice.toLocaleString('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR'
+                });
+            }
+            
+            // Reset database
+            resetBtn.addEventListener('click', function() {
+                try {
+                    addLog('Removing car database...', 'info');
+                    localStorage.removeItem('carDatabase');
+                    localStorage.removeItem('userFavorites');
+                    addLog('Car database successfully removed!', 'success');
+                    addLog('Please click "Check Database" to verify or go to "View Cars" to see the new cars.', 'info');
+                } catch (error) {
+                    addLog('Error removing database: ' + error.message, 'error');
+                }
+            });
+            
+            // Check database
+            checkBtn.addEventListener('click', function() {
+                try {
+                    const carData = localStorage.getItem('carDatabase');
+                    
+                    if (!carData) {
+                        addLog('No car database found. It will be created when you visit the cars page.', 'info');
+                    } else {
+                        const cars = JSON.parse(carData);
+                        addLog(`Database contains ${cars.length} cars:`, 'success');
+                        
+                        // List first 3 cars
+                        for (let i = 0; i < Math.min(3, cars.length); i++) {
+                            const car = cars[i];
+                            addLog(`${i+1}. ${car.brand} ${car.model} (${car.year}) - ${formatPrice(car.price)}`, 'info');
+                        }
+                        
+                        if (cars.length > 3) {
+                            addLog(`... and ${cars.length - 3} more cars`, 'info');
+                        }
+                    }
+                } catch (error) {
+                    addLog('Error checking database: ' + error.message, 'error');
+                }
+            });
+            
+            // Initial check
+            checkBtn.click();
+        });
+    </script>
+</body>
+</html>

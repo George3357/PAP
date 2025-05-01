@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registrar - CarDealz</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/theme-dark.css">
+<style>
+    /* Logo Styling */
+    .logo a {
+        font-size: 24px;
+        font-weight: 700;
+        text-decoration: none;
+        color: var(--text-dark);
+    }
+    
+    .logo a span {
+        color: var(--text-dark);
+    }
+    
+    .logo a span + span {
+        color: #2196f3;
+    }
+    
+    /* Password Strength Meter */
+    .password-strength {
+        margin-top: 5px;
+    }
+    
+    .strength-meter {
+        height: 4px;
+        background-color: var(--bg-dark);
+        border-radius: 2px;
+        margin-bottom: 5px;
+    }
+    
+    .strength-meter-fill {
+        height: 100%;
+        border-radius: 2px;
+        width: 0;
+        transition: width 0.3s ease, background-color 0.3s ease;
+    }
+    
+    .strength-text {
+        font-size: 12px;
+        color: var(--text-light);
+    }
+    
+    .text-link {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+    
+    .text-link:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <span>Car</span><span>Dealz</span>
+                </a>
+            </div>
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="cars.html">Carros</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Registrar</a>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Auth Section -->
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>Criar Conta</h2>
+                <p>Registre-se para acessar todos os recursos</p>
+            </div>
+            
+            <div class="social-auth">
+                <a href="#" class="btn btn-social btn-google">
+                    <i class="fab fa-google"></i> Registrar com Google
+                </a>
+                <a href="#" class="btn btn-social btn-facebook">
+                    <i class="fab fa-facebook-f"></i> Registrar com Facebook
+                </a>
+            </div>
+            
+            <div class="auth-separator">
+                <span>ou registre-se com email</span>
+            </div>
+            
+            <form id="registerForm" class="form">
+                <div class="form-group">
+                    <label for="username">Nome de Usuário</label>
+                    <input type="text" id="username" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-input" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" class="form-input" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="password-strength">
+                        <div class="strength-meter">
+                            <div class="strength-meter-fill" data-strength="0"></div>
+                        </div>
+                        <div class="strength-text">Força da senha: <span>Fraca</span></div>
+                    </div>
+                </div>
+                
+                <div class="form-group form-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">
+                        Eu concordo com os <a href="#" class="text-link">Termos de Serviço</a> e <a href="#" class="text-link">Política de Privacidade</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+            </form>
+            
+            <div class="auth-footer">
+                Já tem uma conta? <a href="login.html">Faça login</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="logo">
+                    <a href="index.html">
+                        <span>Car</span><span>Dealz</span>
+                    </a>
+                </div>
+                <p>Oferecemos os melhores carros do mercado com preços competitivos e atendimento de qualidade.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="cars.html">Carros</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Suporte</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p><i class="fas fa-envelope"></i> Email: info@cardealz.com</p>
+                <p><i class="fas fa-phone"></i> Telefone: +1 212 555 1234</p>
+                <p><i class="fas fa-map-marker-alt"></i> Endereço: 5th Avenue, New York City</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 CarDealz. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+
+<!-- Password Strength Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordInput = document.getElementById('password');
+        const strengthMeter = document.querySelector('.strength-meter-fill');
+        const strengthText = document.querySelector('.strength-text span');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) {
+                strength += 1;
+            }
+            
+            // Uppercase check
+            if (/[A-Z]/.test(password)) {
+                strength += 1;
+            }
+            
+            // Lowercase check
+            if (/[a-z]/.test(password)) {
+                strength += 1;
+            }
+            
+            // Number check
+            if (/[0-9]/.test(password)) {
+                strength += 1;
+            }
+            
+            // Special character check
+            if (/[^A-Za-z0-9]/.test(password)) {
+                strength += 1;
+            }
+            
+            // Update strength meter
+            strengthMeter.setAttribute('data-strength', strength);
+            
+            // Update strength text
+            let strengthLabel = 'Fraca';
+            let strengthColor = '#e53935'; // danger-color
+            let strengthWidth = '0%';
+            
+            if (strength >= 4) {
+                strengthLabel = 'Forte';
+                strengthColor = '#4caf50'; // success-color
+                strengthWidth = '100%';
+            } else if (strength >= 3) {
+                strengthLabel = 'Boa';
+                strengthColor = '#546e7a'; // info-color
+                strengthWidth = '75%';
+            } else if (strength >= 2) {
+                strengthLabel = 'Média';
+                strengthColor = '#f9a825'; // warning-color
+                strengthWidth = '50%';
+            } else if (strength >= 1) {
+                strengthLabel = 'Fraca';
+                strengthColor = '#e53935'; // danger-color
+                strengthWidth = '25%';
+            }
+            
+            strengthText.textContent = strengthLabel;
+            strengthMeter.style.backgroundColor = strengthColor;
+            strengthMeter.style.width = strengthWidth;
+        });
+        
+        // Form validation
+        const registerForm = document.getElementById('registerForm');
+        const confirmPassword = document.getElementById('confirmPassword');
+        
+        registerForm.addEventListener('submit', function(e) {
+            if (passwordInput.value !== confirmPassword.value) {
+                e.preventDefault();
+                alert('As senhas não coincidem!');
+                return false;
+            }
+        });
+    });
+</script>
+</body>
+</html>

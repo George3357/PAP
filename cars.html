@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supercarros - CarDealz</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/theme-dark.css">
+<link rel="stylesheet" href="css/favorites.css">
+<link rel="stylesheet" href="css/contact.css">
+<style>
+    /* Logo Styling */
+    .logo a {
+        font-size: 24px;
+        font-weight: 700;
+        text-decoration: none;
+        color: var(--text-dark);
+    }
+    
+    .logo a span {
+        color: var(--text-dark);
+    }
+    
+    .logo a span + span {
+        color: #2196f3;
+    }
+    
+    /* Cars Page Styles */
+    .cars-section {
+        padding: 60px 0;
+        background-color: var(--bg-color);
+    }
+    
+    .cars-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+    
+    .car-card {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: var(--transition);
+    }
+    
+    .car-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .car-image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .car-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .car-card:hover .car-image img {
+        transform: scale(1.05);
+    }
+    
+    .car-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    
+    .car-badge.new {
+        background-color: var(--success-color);
+        color: white;
+    }
+    
+    .car-badge.used {
+        background-color: var(--info-color);
+        color: white;
+    }
+    
+    .car-favorite {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 36px;
+        height: 36px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .car-favorite:hover {
+        background-color: white;
+    }
+    
+    .car-favorite i {
+        font-size: 18px;
+        color: var(--text-light);
+        transition: var(--transition);
+    }
+    
+    .car-favorite.active i {
+        color: var(--danger-color);
+    }
+    
+    .car-content {
+        padding: 20px;
+    }
+    
+    .car-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: var(--text-dark);
+    }
+    
+    .car-subtitle {
+        color: var(--text-light);
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+    
+    .car-price {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+    }
+    
+    .car-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .car-feature {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 13px;
+        color: var(--text-color);
+    }
+    
+    .car-feature i {
+        color: var(--primary-color);
+        font-size: 14px;
+    }
+    
+    .car-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    /* Filter Sidebar */
+    .cars-layout {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 30px;
+    }
+    
+    .filter-sidebar {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        padding: 25px;
+        height: fit-content;
+    }
+    
+    .filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .filter-header h3 {
+        margin: 0;
+        color: var(--text-dark);
+    }
+    
+    .filter-reset {
+        color: var(--primary-color);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    .filter-group {
+        margin-bottom: 20px;
+    }
+    
+    .filter-group h4 {
+        margin: 0 0 15px;
+        color: var(--text-dark);
+        font-size: 16px;
+    }
+    
+    .filter-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .filter-checkbox label {
+        color: var(--text-color);
+        cursor: pointer;
+    }
+    
+    .filter-range {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .filter-range-input {
+        flex: 1;
+    }
+    
+    .filter-range-input label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 13px;
+        color: var(--text-light);
+    }
+    
+    .filter-range-input input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        background-color: var(--input-bg);
+        color: var(--text-color);
+    }
+    
+    .filter-actions {
+        margin-top: 30px;
+    }
+    
+    /* Search Bar */
+    .search-bar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .search-input {
+        flex: 1;
+        position: relative;
+    }
+    
+    .search-input input {
+        width: 100%;
+        padding: 12px 20px 12px 45px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        background-color: var(--input-bg);
+        color: var(--text-color);
+    }
+    
+    .search-input i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-light);
+    }
+    
+    /* Results Info */
+    .results-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .results-count {
+        color: var(--text-color);
+    }
+    
+    .results-count span {
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+    
+    .results-sort {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .results-sort label {
+        color: var(--text-color);
+    }
+    
+    .results-sort select {
+        padding: 8px 12px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        background-color: var(--input-bg);
+        color: var(--text-color);
+    }
+    
+    /* No Results */
+    .no-results {
+        text-align: center;
+        padding: 60px 0;
+    }
+    
+    .no-results i {
+        font-size: 48px;
+        color: var(--text-light);
+        margin-bottom: 15px;
+    }
+    
+    .no-results h3 {
+        margin-bottom: 10px;
+        color: var(--text-dark);
+    }
+    
+    .no-results p {
+        color: var(--text-light);
+        margin-bottom: 20px;
+    }
+    
+    /* Mobile Filter Toggle */
+    .mobile-filter-toggle {
+        display: none;
+        margin-bottom: 20px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+        .cars-layout {
+            grid-template-columns: 1fr;
+        }
+        
+        .filter-sidebar {
+            display: none;
+        }
+        
+        .filter-sidebar.active {
+            display: block;
+        }
+        
+        .mobile-filter-toggle {
+            display: block;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .cars-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+        
+        .results-info {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .cars-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .search-bar {
+            flex-direction: column;
+        }
+    }
+</style>
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <span>Car</span><span>Dealz</span>
+                </a>
+            </div>
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="cars.html" class="active">Supercarros</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <!-- This will be replaced by auth.js -->
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Registrar</a>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Nossos Supercarros</h1>
+        <div class="breadcrumbs">
+            <a href="index.html">Início</a> / <span>Supercarros</span>
+        </div>
+    </div>
+</section>
+
+<!-- Cars Section -->
+<section class="cars-section">
+    <div class="container">
+        <!-- Mobile Filter Toggle -->
+        <button class="btn btn-outline mobile-filter-toggle">
+            <i class="fas fa-filter"></i> Filtros
+        </button>
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <div class="search-input">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Buscar por marca, modelo...">
+            </div>
+            <button class="btn btn-primary" id="searchButton">Buscar</button>
+        </div>
+        
+        <div class="cars-layout">
+            <!-- Filter Sidebar -->
+            <div class="filter-sidebar">
+                <div class="filter-header">
+                    <h3>Filtros</h3>
+                    <button class="filter-reset" id="resetFilters">Limpar</button>
+                </div>
+                
+                <form id="filterForm">
+                    <div class="filter-group">
+                        <h4>Marca</h4>
+                        <div class="filter-options" id="brandFilters">
+                            <div class="filter-checkbox">
+                                <input type="radio" id="brand-all" name="brand" value="all" checked>
+                                <label for="brand-all">Todas</label>
+                            </div>
+                            <!-- Brands will be added dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Preço</h4>
+                        <div class="filter-range">
+                            <div class="filter-range-input">
+                                <label for="minPrice">Mínimo</label>
+                                <input type="number" id="minPrice" name="minPrice" placeholder="R$ Min">
+                            </div>
+                            <div class="filter-range-input">
+                                <label for="maxPrice">Máximo</label>
+                                <input type="number" id="maxPrice" name="maxPrice" placeholder="R$ Max">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Ano</h4>
+                        <div class="filter-range">
+                            <div class="filter-range-input">
+                                <label for="minYear">De</label>
+                                <input type="number" id="minYear" name="minYear" placeholder="Ano Min">
+                            </div>
+                            <div class="filter-range-input">
+                                <label for="maxYear">Até</label>
+                                <input type="number" id="maxYear" name="maxYear" placeholder="Ano Max">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Estado</h4>
+                        <div class="filter-options">
+                            <div class="filter-checkbox">
+                                <input type="radio" id="status-all" name="status" value="all" checked>
+                                <label for="status-all">Todos</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="radio" id="status-new" name="status" value="new">
+                                <label for="status-new">Novo</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="radio" id="status-used" name="status" value="used">
+                                <label for="status-used">Usado</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button type="submit" class="btn btn-primary btn-block">Aplicar Filtros</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Cars Content -->
+            <div class="cars-content">
+                <!-- Results Info -->
+                <div class="results-info">
+                    <div class="results-count">
+                        Mostrando <span id="resultsCount">0</span> supercarros
+                    </div>
+                    <div class="results-sort">
+                        <label for="sortBy">Ordenar por:</label>
+                        <select id="sortBy">
+                            <option value="price-asc">Preço: Menor para Maior</option>
+                            <option value="price-desc">Preço: Maior para Menor</option>
+                            <option value="year-desc">Ano: Mais Recente</option>
+                            <option value="year-asc">Ano: Mais Antigo</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Cars Grid -->
+                <div class="cars-grid" id="carsGrid">
+                    <!-- Cars will be added dynamically -->
+                </div>
+                
+                <!-- No Results -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i class="fas fa-car-side"></i>
+                    <h3>Nenhum supercarro encontrado</h3>
+                    <p>Tente ajustar seus filtros ou realizar uma nova busca.</p>
+                    <button class="btn btn-primary" id="clearFiltersBtn">Limpar Filtros</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="logo">
+                    <a href="index.html">
+                        <span>Car</span><span>Dealz</span>
+                    </a>
+                </div>
+                <p>Oferecemos os mais exclusivos supercarros e hipercars do mercado com atendimento personalizado e serviço premium.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="cars.html">Supercarros</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Suporte</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p><i class="fas fa-envelope"></i> Email: info@cardealz.com</p>
+                <p><i class="fas fa-phone"></i> Telefone: +1 212 555 1234</p>
+                <p><i class="fas fa-map-marker-alt"></i> Endereço: 5th Avenue, New York City</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 CarDealz. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script src="js/main.js"></script>
+<script src="js/reset-cars.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cars.js"></script>
+<script src="js/favorites.js"></script>
+<script src="js/contact.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get DOM elements
+        const carsGrid = document.getElementById('carsGrid');
+        const resultsCount = document.getElementById('resultsCount');
+        const noResults = document.getElementById('noResults');
+        const filterForm = document.getElementById('filterForm');
+        const resetFilters = document.getElementById('resetFilters');
+        const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const sortBy = document.getElementById('sortBy');
+        const brandFilters = document.getElementById('brandFilters');
+        const mobileFilterToggle = document.querySelector('.mobile-filter-toggle');
+        const filterSidebar = document.querySelector('.filter-sidebar');
+        
+        // Get all cars
+        let allCars = getAllCars();
+        let filteredCars = [...allCars];
+        
+        // Populate brand filters
+        const brands = [...new Set(allCars.map(car => car.brand))].sort();
+        brands.forEach(brand => {
+            const brandFilter = document.createElement('div');
+            brandFilter.className = 'filter-checkbox';
+            brandFilter.innerHTML = `
+                <input type="radio" id="brand-${brand.toLowerCase()}" name="brand" value="${brand}">
+                <label for="brand-${brand.toLowerCase()}">${brand}</label>
+            `;
+            brandFilters.appendChild(brandFilter);
+        });
+        
+        // Render cars
+        function renderCars(cars) {
+            carsGrid.innerHTML = '';
+            
+            if (cars.length === 0) {
+                noResults.style.display = 'block';
+                resultsCount.textContent = '0';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            resultsCount.textContent = cars.length;
+            
+            cars.forEach(car => {
+                const carCard = document.createElement('div');
+                carCard.className = 'car-card';
+                
+                const isFavorite = isInFavorites(car.id);
+                
+                carCard.innerHTML = `
+                    <div class="car-image">
+                        <img src="${car.images[0]}" alt="${car.brand} ${car.model}">
+                        <div class="car-badge ${car.status}">${car.status === 'new' ? 'Novo' : 'Usado'}</div>
+                        <div class="car-favorite ${isFavorite ? 'active' : ''}" data-id="${car.id}">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="car-content">
+                        <h3 class="car-title">${car.brand} ${car.model}</h3>
+                        <div class="car-subtitle">${car.year} • ${car.mileage.toLocaleString('pt-BR')} km • ${car.fuel}</div>
+                        <div class="car-price">${formatPrice(car.price)}</div>
+                        <div class="car-features">
+                            <div class="car-feature">
+                                <i class="fas fa-car"></i> ${car.transmission}
+                            </div>
+                            <div class="car-feature">
+                                <i class="fas fa-palette"></i> ${car.color}
+                            </div>
+                            <div class="car-feature">
+                                <i class="fas fa-gas-pump"></i> ${car.fuel}
+                            </div>
+                        </div>
+                        <div class="car-actions">
+                            <a href="car-details.html?id=${car.id}" class="btn btn-primary btn-sm">Ver Detalhes</a>
+                            <button class="btn btn-outline btn-sm contact-btn" data-id="${car.id}">Contato</button>
+                        </div>
+                    </div>
+                `;
+                
+                carsGrid.appendChild(carCard);
+                
+                // Add favorite toggle event
+                const favoriteBtn = carCard.querySelector('.car-favorite');
+                favoriteBtn.addEventListener('click', function() {
+                    const carId = parseInt(this.getAttribute('data-id'));
+                    
+                    if (this.classList.contains('active')) {
+                        removeFromFavorites(carId);
+                        this.classList.remove('active');
+                    } else {
+                        if (addToFavorites(carId)) {
+                            this.classList.add('active');
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Sort cars
+        function sortCars(cars, sortOption) {
+            const sortedCars = [...cars];
+            
+            switch (sortOption) {
+                case 'price-asc':
+                    sortedCars.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    sortedCars.sort((a, b) => b.price - a.price);
+                    break;
+                case 'year-desc':
+                    sortedCars.sort((a, b) => b.year - a.year);
+                    break;
+                case 'year-asc':
+                    sortedCars.sort((a, b) => a.year - b.year);
+                    break;
+                default:
+                    break;
+            }
+            
+            return sortedCars;
+        }
+        
+        // Apply filters
+        function applyFilters() {
+            const brand = document.querySelector('input[name="brand"]:checked').value;
+            const status = document.querySelector('input[name="status"]:checked').value;
+            const minPrice = document.getElementById('minPrice').value ? parseInt(document.getElementById('minPrice').value) : null;
+            const maxPrice = document.getElementById('maxPrice').value ? parseInt(document.getElementById('maxPrice').value) : null;
+            const minYear = document.getElementById('minYear').value ? parseInt(document.getElementById('minYear').value) : null;
+            const maxYear = document.getElementById('maxYear').value ? parseInt(document.getElementById('maxYear').value) : null;
+            const searchTerm = searchInput.value.trim();
+            
+            let filtered = allCars;
+            
+            // Apply search term
+            if (searchTerm) {
+                filtered = filtered.filter(car => 
+                    car.brand.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                    car.model.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+            
+            // Apply filters
+            const filters = {
+                brand: brand,
+                status: status,
+                minPrice: minPrice,
+                maxPrice: maxPrice,
+                minYear: minYear,
+                maxYear: maxYear
+            };
+            
+            filtered = filterCars(filters);
+            
+            // Apply sorting
+            filtered = sortCars(filtered, sortBy.value);
+            
+            filteredCars = filtered;
+            renderCars(filteredCars);
+        }
+        
+        // Event listeners
+        filterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            applyFilters();
+            
+            // Close mobile filter on submit
+            if (window.innerWidth < 992) {
+                filterSidebar.classList.remove('active');
+            }
+        });
+        
+        resetFilters.addEventListener('click', function() {
+            document.getElementById('brand-all').checked = true;
+            document.getElementById('status-all').checked = true;
+            document.getElementById('minPrice').value = '';
+            document.getElementById('maxPrice').value = '';
+            document.getElementById('minYear').value = '';
+            document.getElementById('maxYear').value = '';
+            searchInput.value = '';
+            
+            applyFilters();
+        });
+        
+        clearFiltersBtn.addEventListener('click', function() {
+            resetFilters.click();
+        });
+        
+        searchButton.addEventListener('click', function() {
+            applyFilters();
+        });
+        
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                applyFilters();
+            }
+        });
+        
+        sortBy.addEventListener('change', function() {
+            filteredCars = sortCars(filteredCars, this.value);
+            renderCars(filteredCars);
+        });
+        
+        mobileFilterToggle.addEventListener('click', function() {
+            filterSidebar.classList.toggle('active');
+        });
+        
+        // Initial render
+        filteredCars = sortCars(filteredCars, sortBy.value);
+        renderCars(filteredCars);
+    });
+</script>
+</body>
+</html>

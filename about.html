@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CarDealz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme-dark.css">
+    <style>
+        /* Logo Styling */
+        .logo a {
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+        
+        .logo a span {
+            color: var(--text-dark);
+        }
+        
+        .logo a span + span {
+            color: #2196f3;
+        }
+        
+        /* About Page Styles */
+        .about-hero {
+            position: relative;
+            height: 500px;
+            background-color: #000;
+            overflow: hidden;
+        }
+        
+        .about-hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+        
+        .about-hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            width: 80%;
+            max-width: 800px;
+        }
+        
+        .about-hero-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .about-hero-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .about-section {
+            padding: 80px 0;
+            background-color: var(--bg-color);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-content h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .about-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        .values-section {
+            padding: 80px 0;
+            background-color: var(--card-bg);
+        }
+        
+        .values-heading {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .values-heading h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .values-heading p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .value-card {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .value-icon i {
+            font-size: 30px;
+        }
+        
+        .value-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .value-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .team-section {
+            padding: 80px 0;
+            background-color: var(--bg-color);
+        }
+        
+        .team-heading {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .team-heading h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .team-heading p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .team-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-card:hover .team-image img {
+            transform: scale(1.1);
+        }
+        
+        .team-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .team-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+        
+        .team-info p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .team-social a {
+            width: 32px;
+            height: 32px;
+            background-color: var(--bg-hover);
+            color: var(--text-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .team-social a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .showroom-section {
+            padding: 80px 0;
+            background-color: var(--card-bg);
+        }
+        
+        .showroom-heading {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .showroom-heading h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .showroom-heading p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .showroom-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .showroom-image {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: var(--shadow);
+        }
+        
+        .showroom-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .showroom-image:hover img {
+            transform: scale(1.1);
+        }
+        
+        .cta-section {
+            padding: 80px 0;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .showroom-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero {
+                height: 400px;
+            }
+            
+            .about-hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .about-hero-content p {
+                font-size: 16px;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .showroom-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <span>Car</span><span>Dealz</span>
+                </a>
+            </div>
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="cars.html">Supercarros</a></li>
+                    <li><a href="about.html" class="active">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <!-- This will be replaced by auth.js -->
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Registrar</a>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="about-hero">
+    <img src="images/showroom.webp" alt="Luxury Cars Showroom" class="about-hero-image">
+    <div class="about-hero-content">
+        <h1>Excelência em Supercarros</h1>
+        <p>Desde 2005, a CarDealz tem sido sinônimo de luxo, performance e exclusividade no mercado de supercarros e hipercars.</p>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="/placeholder.svg?height=400&width=600" alt="CarDealz Showroom">
+            </div>
+            <div class="about-content">
+                <h2>Nossa História</h2>
+                <p>Fundada em 2005 por entusiastas apaixonados por automóveis de alto desempenho, a CarDealz nasceu com a missão de trazer os mais exclusivos supercarros e hipercars para o mercado europeu.</p>
+                <p>Ao longo dos anos, construímos uma reputação sólida baseada em confiança, conhecimento especializado e um compromisso inabalável com a satisfação do cliente. Nossa equipe é composta por especialistas que compartilham a mesma paixão por carros excepcionais.</p>
+                <p>Hoje, somos reconhecidos como líderes no segmento de luxo automotivo, com parcerias exclusivas com as mais prestigiadas marcas do mundo, como Ferrari, Lamborghini, Bugatti, Koenigsegg, Pagani e muitas outras.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="values-section">
+    <div class="container">
+        <div class="values-heading">
+            <h2>Nossos Valores</h2>
+            <p>Princípios que guiam nossa busca pela excelência e satisfação dos clientes mais exigentes do mundo.</p>
+        </div>
+        
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3>Excelência</h3>
+                <p>Comprometidos com os mais altos padrões em todos os aspectos do nosso negócio, desde a seleção de veículos até o atendimento ao cliente.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Integridade</h3>
+                <p>Transparência e honestidade em todas as nossas interações, construindo relacionamentos duradouros baseados em confiança mútua.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3>Paixão</h3>
+                <p>Nossa paixão por supercarros e hipercars nos impulsiona a oferecer experiências extraordinárias e conhecimento especializado.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section">
+    <div class="container">
+        <div class="team-heading">
+            <h2>Nossa Equipe</h2>
+            <p>Conheça os especialistas apaixonados que tornam a CarDealz a referência em supercarros de luxo.</p>
+        </div>
+        
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="/placeholder.svg?height=250&width=250" alt="Carlos Mendes">
+                </div>
+                <div class="team-info">
+                    <h3>Carlos Mendes</h3>
+                    <p>Fundador & CEO</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="/placeholder.svg?height=250&width=250" alt="Sofia Almeida">
+                </div>
+                <div class="team-info">
+                    <h3>Sofia Almeida</h3>
+                    <p>Diretora de Vendas</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="/placeholder.svg?height=250&width=250" alt="André Ferrari">
+                </div>
+                <div class="team-info">
+                    <h3>André Ferrari</h3>
+                    <p>Especialista Técnico</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="/placeholder.svg?height=250&width=250" alt="Luísa Martins">
+                </div>
+                <div class="team-info">
+                    <h3>Luísa Martins</h3>
+                    <p>Relações com Clientes</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Showroom Section -->
+<section class="showroom-section">
+    <div class="container">
+        <div class="showroom-heading">
+            <h2>Nosso Showroom</h2>
+            <p>Um espaço exclusivo projetado para proporcionar uma experiência imersiva com os mais impressionantes supercarros do mundo.</p>
+        </div>
+        
+        <div class="showroom-grid">
+            <div class="showroom-image">
+                <img src="/placeholder.svg?height=250&width=400" alt="Showroom Interior">
+            </div>
+            <div class="showroom-image">
+                <img src="/placeholder.svg?height=250&width=400" alt="Luxury Cars Display">
+            </div>
+            <div class="showroom-image">
+                <img src="/placeholder.svg?height=250&width=400" alt="VIP Lounge">
+            </div>
+            <div class="showroom-image">
+                <img src="/placeholder.svg?height=250&width=400" alt="Test Drive Area">
+            </div>
+            <div class="showroom-image">
+                <img src="/placeholder.svg?height=250&width=400" alt="Customization Center">
+            </div>
+            <div class="showroom-image">
+                <img src="/placeholder.svg?height=250&width=400" alt="Service Center">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Pronto para uma Experiência Extraordinária?</h2>
+            <p>Visite nosso showroom ou agende um test drive exclusivo com o supercarro dos seus sonhos.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-light">Entre em Contato</a>
+                <a href="cars.html" class="btn btn-outline-light">Ver Supercarros</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="logo">
+                    <a href="index.html">
+                        <span>Car</span><span>Dealz</span>
+                    </a>
+                </div>
+                <p>Oferecemos os mais exclusivos supercarros e hipercars do mercado com atendimento personalizado e serviço premium.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="cars.html">Supercarros</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Suporte</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p><i class="fas fa-envelope"></i> Email: info@cardealz.com</p>
+                <p><i class="fas fa-phone"></i> Telefone: +1 212 555 1234</p>
+                <p><i class="fas fa-map-marker-alt"></i> Endereço: 5th Avenue, New York City</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 CarDealz. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CarDealz - Luxury Supercars</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/theme-dark.css" />
+    <link rel="stylesheet" href="css/premium-brands.css" />
+    <link rel="stylesheet" href="css/favorites.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <style>
+      /* Updated Logo and Auth Buttons Styles */
+      .logo a {
+        text-decoration: none;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .logo a span:first-child {
+        color: #333;
+      }
+
+      .logo a span:last-child {
+        color: #007bff;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .auth-buttons .btn-login {
+        display: inline-block;
+        padding: 8px 20px;
+        background-color: white;
+        color: #007bff;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      }
+
+      .auth-buttons .btn-register {
+        display: inline-block;
+        padding: 8px 20px;
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      }
+
+      .auth-buttons .btn-login:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+      }
+
+      .auth-buttons .btn-register:hover {
+        background-color: #0069d9;
+      }
+
+      /* Hero Section Styles */
+      .hero {
+        position: relative;
+        height: 600px;
+        overflow: hidden;
+      }
+
+      .hero-slider {
+        width: 100%;
+        height: 100%;
+      }
+
+      .hero-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("/placeholder.svg?height=600&width=1200");
+        background-size: cover;
+        background-position: center;
+        display: none;
+      }
+
+      .hero-slide.active {
+        display: block;
+      }
+
+      .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        z-index: 2;
+        width: 80%;
+        max-width: 800px;
+      }
+
+      .hero-content h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-content p {
+        font-size: 18px;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
+
+      /* Featured Cars Section */
+      .featured-cars {
+        padding: 80px 0;
+        background-color: var(--bg-color);
+      }
+
+      .section-title {
+        font-size: 36px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 50px;
+        color: var(--text-dark);
+      }
+
+      .cars-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .car-card {
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+      }
+
+      .car-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .car-image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .car-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .car-card:hover .car-image img {
+        transform: scale(1.05);
+      }
+
+      .car-status {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .car-status.new {
+        background-color: #28a745;
+        color: #fff;
+      }
+
+      .car-status.used {
+        background-color: #ffc107;
+        color: #000;
+      }
+
+      .car-details {
+        padding: 20px;
+      }
+
+      .car-details h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--text-dark);
+      }
+
+      .car-price {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+      }
+
+      .car-specs {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+
+      .car-spec {
+        font-size: 14px;
+        color: var(--text-light);
+      }
+
+      .car-spec i {
+        margin-right: 5px;
+        color: var(--primary-color);
+      }
+
+      .view-all {
+        text-align: center;
+      }
+
+      .loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 50px 0;
+        grid-column: 1 / -1;
+      }
+
+      .loading i {
+        font-size: 40px;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+      }
+
+      .no-cars {
+        text-align: center;
+        grid-column: 1 / -1;
+        padding: 50px 0;
+        color: var(--text-light);
+      }
+
+      /* Why Choose Us Section */
+      .why-choose-us {
+        padding: 80px 0;
+        background-color: var(--card-bg);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+      }
+
+      .feature {
+        text-align: center;
+        padding: 30px 20px;
+        background-color: var(--bg-color);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+      }
+
+      .feature:hover {
+        transform: translateY(-5px);
+      }
+
+      .feature-icon {
+        width: 70px;
+        height: 70px;
+        background-color: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+      }
+
+      .feature-icon i {
+        font-size: 30px;
+      }
+
+      .feature h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--text-dark);
+      }
+
+      .feature p {
+        font-size: 16px;
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+
+      /* Testimonials Section */
+      .testimonials {
+        padding: 80px 0;
+        background-color: var(--bg-color);
+      }
+
+      .testimonials-slider {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+      }
+
+      .testimonial {
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+        flex: 1;
+      }
+
+      .testimonial-content {
+        margin-bottom: 20px;
+      }
+
+      .testimonial-content p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--text-color);
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+      }
+
+      .author-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 15px;
+      }
+
+      .author-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .author-info h4 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: var(--text-dark);
+      }
+
+      .author-info p {
+        font-size: 14px;
+        color: var(--text-light);
+      }
+
+      /* CTA Section */
+      .cta-section {
+        padding: 80px 0;
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .cta-content {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .cta-content h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .cta-content p {
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+
+      .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+
+      .btn-outline:hover {
+        background-color: white;
+        color: var(--primary-color);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 992px) {
+        .cars-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .testimonials-slider {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-content h1 {
+          font-size: 36px;
+        }
+
+        .hero-content p {
+          font-size: 16px;
+        }
+
+        .section-title {
+          font-size: 28px;
+        }
+
+        .cta-content h2 {
+          font-size: 28px;
+        }
+
+        .cta-content p {
+          font-size: 16px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .cars-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="index.html"> <span>Car</span><span>Dealz</span> </a>
+          </div>
+          <nav class="nav-menu">
+            <ul class="nav-list">
+              <li><a href="index.html" class="active">Início</a></li>
+              <li><a href="cars.html">Supercarros</a></li>
+              <li><a href="about.html">Sobre</a></li>
+              <li><a href="contact.html">Contato</a></li>
+            </ul>
+          </nav>
+          <div class="nav-actions">
+            <div class="auth-buttons">
+              <a href="login.html" class="btn-login">Login</a>
+              <a href="register.html" class="btn-register">Registrar</a>
+            </div>
+            <div class="user-menu" style="display: none">
+              <button class="user-menu-button">
+                <i class="fas fa-user-circle"></i>
+                <span class="username">Username</span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
+              <div class="user-dropdown">
+                <a href="profile.html"><i class="fas fa-user"></i> Perfil</a>
+                <a href="#" id="logoutBtn"
+                  ><i class="fas fa-sign-out-alt"></i> Sair</a
+                >
+              </div>
+            </div>
+            <button class="mobile-menu-toggle">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-slider">
+        <div class="hero-slide active">
+          <div class="hero-content">
+            <h1>Descubra o Extraordinário</h1>
+            <p>
+              Supercarros e hipercars exclusivos para os entusiastas mais
+              exigentes
+            </p>
+            <div class="hero-buttons">
+              <a href="cars.html" class="btn btn-primary">Ver Supercarros</a>
+              <a href="contact.html" class="btn btn-outline-light"
+                >Agendar Test Drive</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Premium Brands Section -->
+    <section class="premium-brands-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Marcas Premium</h2>
+          <p>
+            Trabalhamos com as marcas mais prestigiadas e exclusivas do mundo
+            automotivo.
+          </p>
+        </div>
+
+        <div class="brands-grid">
+          <a href="cars.html?brand=Ferrari" class="brand-card">
+            <div class="brand-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <h3>Ferrari</h3>
+          </a>
+
+          <a href="cars.html?brand=Lamborghini" class="brand-card">
+            <div class="brand-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <h3>Lamborghini</h3>
+          </a>
+
+          <a href="cars.html?brand=McLaren" class="brand-card">
+            <div class="brand-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <h3>McLaren</h3>
+          </a>
+
+          <a href="cars.html?brand=Bugatti" class="brand-card">
+            <div class="brand-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <h3>Bugatti</h3>
+          </a>
+
+          <a href="cars.html?brand=Koenigsegg" class="brand-card">
+            <div class="brand-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <h3>Koenigsegg</h3>
+          </a>
+
+          <a href="cars.html?brand=Rolls-Royce" class="brand-card">
+            <div class="brand-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <h3>Rolls-Royce</h3>
+          </a>
+
+          <a href="cars.html?brand=Porsche" class="brand-card">
+            <div class="brand-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <h3>Porsche</h3>
+          </a>
+
+          <a href="cars.html?brand=Aston Martin" class="brand-card">
+            <div class="brand-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <h3>Aston Martin</h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Cars Section -->
+    <section class="featured-cars">
+      <div class="container">
+        <h2 class="section-title">Supercarros em Destaque</h2>
+        <div class="cars-grid" id="featuredCarsGrid">
+          <!-- Featured cars will be loaded here by JavaScript -->
+          <div class="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>Carregando...</span>
+          </div>
+        </div>
+        <div class="view-all">
+          <a href="cars.html" class="btn btn-outline"
+            >Ver Todos os Supercarros</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+      <div class="container">
+        <h2 class="section-title">Por Que Escolher a CarDealz</h2>
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <h3>Seleção Premium</h3>
+            <p>
+              Oferecemos apenas os melhores e mais exclusivos supercarros e
+              hipercars do mundo.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Qualidade Garantida</h3>
+            <p>
+              Todos os nossos veículos passam por rigorosas inspeções e possuem
+              histórico completo.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <h3>Atendimento VIP</h3>
+            <p>
+              Experiência de compra personalizada com consultores especializados
+              em supercarros.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <h3>Serviço Especializado</h3>
+            <p>
+              Manutenção e serviços realizados por técnicos certificados pelas
+              fabricantes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+      <div class="container">
+        <h2 class="section-title">O Que Nossos Clientes Dizem</h2>
+        <div class="testimonials-slider">
+          <div class="testimonial">
+            <div class="testimonial-content">
+              <p>
+                "Experiência incrível na compra do meu Ferrari SF90 Stradale.
+                Atendimento impecável e processo de compra sem complicações."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-image">
+                <img src="/placeholder.svg?height=60&width=60" alt="Cliente" />
+              </div>
+              <div class="author-info">
+                <h4>Ricardo Monteiro</h4>
+                <p>CEO, Tech Innovations</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-content">
+              <p>
+                "A CarDealz superou todas as minhas expectativas. Encontrei meu
+                Lamborghini Aventador SVJ em perfeito estado e com um preço
+                justo."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-image">
+                <img src="/placeholder.svg?height=60&width=60" alt="Cliente" />
+              </div>
+              <div class="author-info">
+                <h4>Ana Oliveira</h4>
+                <p>Empresária</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-content">
+              <p>
+                "O serviço pós-venda da CarDealz é excepcional. Meu McLaren 720S
+                recebe cuidados de primeira linha sempre que precisa de
+                manutenção."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-image">
+                <img src="/placeholder.svg?height=60&width=60" alt="Cliente" />
+              </div>
+              <div class="author-info">
+                <h4>Carlos Mendes</h4>
+                <p>Investidor</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Pronto para Experimentar o Extraordinário?</h2>
+          <p>
+            Visite nosso showroom ou agende um test drive exclusivo com o
+            supercarro dos seus sonhos.
+          </p>
+          <div class="cta-buttons">
+            <a href="contact.html" class="btn btn-primary">Entre em Contato</a>
+            <a href="cars.html" class="btn btn-outline">Ver Supercarros</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-about">
+            <div class="logo">
+              <a href="index.html"> <span>Car</span><span>Dealz</span> </a>
+            </div>
+            <p>
+              Oferecemos os mais exclusivos supercarros e hipercars do mercado
+              com atendimento personalizado e serviço premium.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-links">
+            <h3>Links Rápidos</h3>
+            <ul>
+              <li><a href="index.html">Início</a></li>
+              <li><a href="cars.html">Supercarros</a></li>
+              <li><a href="about.html">Sobre</a></li>
+              <li><a href="contact.html">Contato</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-links">
+            <h3>Suporte</h3>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Termos de Uso</a></li>
+              <li><a href="#">Política de Privacidade</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-contact">
+            <h3>Contato</h3>
+            <p><i class="fas fa-envelope"></i> Email: info@cardealz.com</p>
+            <p><i class="fas fa-phone"></i> Telefone: +1 212 555 1234</p>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> Endereço: 5th Avenue, New
+              York City
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 CarDealz. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Clear loading indicator immediately
+        const featuredCarsGrid = document.getElementById("featuredCarsGrid");
+        if (featuredCarsGrid) {
+          featuredCarsGrid.innerHTML =
+            '<p class="no-cars">Carros em destaque serão exibidos aqui.</p>';
+        }
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+        const navMenu = document.querySelector(".nav-menu");
+
+        if (mobileMenuToggle && navMenu) {
+          mobileMenuToggle.addEventListener("click", function () {
+            navMenu.classList.toggle("active");
+            mobileMenuToggle.classList.toggle("active");
+          });
+        }
+
+        // User menu dropdown
+        const userMenuButton = document.querySelector(".user-menu-button");
+        const userDropdown = document.querySelector(".user-dropdown");
+
+        if (userMenuButton && userDropdown) {
+          userMenuButton.addEventListener("click", function () {
+            userDropdown.classList.toggle("active");
+          });
+
+          // Close dropdown when clicking outside
+          document.addEventListener("click", function (event) {
+            if (
+              !userMenuButton.contains(event.target) &&
+              !userDropdown.contains(event.target)
+            ) {
+              userDropdown.classList.remove("active");
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
