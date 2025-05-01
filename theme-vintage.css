@@ -1,0 +1,760 @@
+:root {
+  /* Primary Colors - Vintage theme based on logo */
+  --primary-color: #3a3226;  /* Dark brown from logo */
+  --primary-dark: #2a241c;   /* Darker brown */
+  --primary-light: #5c5142;  /* Lighter brown */
+  --primary-hover: #4a4236;  /* Medium brown for hover states */
+  
+  /* Background Colors - Beige/tan from logo */
+  --bg-color: #e8ddb5;       /* Main beige background */
+  --bg-light: #f0e8c9;       /* Lighter beige */
+  --bg-dark: #d5caA3;        /* Darker beige */
+  --card-bg: #f5f0da;        /* Card background - light beige */
+  
+  /* Text Colors */
+  --text-color: #3a3226;     /* Dark brown for text */
+  --text-light: #5c5142;     /* Medium brown for secondary text */
+  --text-dark: #2a241c;      /* Very dark brown for headings */
+  --text-white: #f5f0da;     /* Light beige for text on dark backgrounds */
+  
+  /* Border Colors */
+  --border-color: #c5bb94;   /* Medium beige for borders */
+  
+  /* Status Colors - Muted to match vintage theme */
+  --success-color: #5a7052;  /* Muted green */
+  --warning-color: #b39656;  /* Muted gold */
+  --danger-color: #a15545;   /* Muted red */
+  --info-color: #5c7a8c;     /* Muted blue */
+  
+  /* Shadow */
+  --shadow: 0 2px 10px rgba(58, 50, 38, 0.1);
+  --shadow-lg: 0 10px 20px rgba(58, 50, 38, 0.15);
+  
+  /* Border Radius */
+  --border-radius: 6px;
+  --border-radius-sm: 3px;
+  --border-radius-lg: 10px;
+  
+  /* Transition */
+  --transition: all 0.3s ease;
+  
+  /* Header Height */
+  --header-height: 80px;
+}
+
+/* ===== GLOBAL STYLES ===== */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Georgia', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-dark);
+  font-family: 'Georgia', serif;
+}
+
+a {
+  color: var(--primary-color);
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* ===== HEADER STYLES ===== */
+.header {
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 10px rgba(58, 50, 38, 0.1);
+}
+
+.logo img {
+  max-height: 50px;
+}
+
+.logo-text {
+  display: none; /* Hide text logo when using image */
+}
+
+.nav-list a {
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.nav-list a:hover, 
+.nav-list a.active {
+  color: var(--primary-color);
+}
+
+/* ===== BUTTON STYLES ===== */
+.btn {
+  font-family: 'Georgia', serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-outline {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  background-color: transparent;
+}
+
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+}
+
+.btn-secondary {
+  background-color: var(--text-light);
+  color: var(--text-white);
+}
+
+.btn-secondary:hover {
+  background-color: var(--text-dark);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: var(--text-white);
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: var(--text-white);
+}
+
+.btn-warning {
+  background-color: var(--warning-color);
+  color: var(--text-dark);
+}
+
+.btn-info {
+  background-color: var(--info-color);
+  color: var(--text-white);
+}
+
+/* ===== FORM STYLES ===== */
+.form-input {
+  border: 2px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-family: 'Georgia', serif;
+}
+
+.form-input:focus {
+  border-color: var(--primary-color);
+}
+
+.form-input::placeholder {
+  color: var(--text-light);
+}
+
+.form-label {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.form-checkbox label {
+  color: var(--text-color);
+}
+
+/* ===== CARD STYLES ===== */
+.card {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+}
+
+.card-header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-footer {
+  border-top: 1px solid var(--border-color);
+}
+
+/* ===== AUTH CONTAINER ===== */
+.auth-container {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.auth-header h2 {
+  color: var(--text-dark);
+}
+
+.auth-separator {
+  color: var(--text-light);
+}
+
+.auth-separator::before,
+.auth-separator::after {
+  background-color: var(--border-color);
+}
+
+/* ===== SOCIAL AUTH BUTTONS ===== */
+.btn-google {
+  background-color: #f5f0da;
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+}
+
+.btn-facebook {
+  background-color: #3b5998;
+  color: var(--text-white);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background-color: var(--bg-dark);
+  color: var(--text-color);
+}
+
+.footer-bottom {
+  background-color: var(--primary-dark);
+  color: var(--text-white);
+}
+
+.footer h3 {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.footer-links a {
+  color: var(--text-color);
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+}
+
+.social-links a {
+  background-color: var(--primary-light);
+  color: var(--text-white);
+}
+
+.social-links a:hover {
+  background-color: var(--primary-color);
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+  background-color: var(--bg-light);
+}
+
+.hero-content h1 {
+  color: var(--text-dark);
+}
+
+.hero-content p {
+  color: var(--text-color);
+}
+
+/* ===== FEATURES SECTION ===== */
+.features-section {
+  background-color: var(--bg-color);
+}
+
+.feature-card {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.feature-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  color: var(--primary-color);
+}
+
+/* ===== CAR LISTINGS ===== */
+.car-card {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.car-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+}
+
+.car-title {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.car-price {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.car-features {
+  color: var(--text-light);
+}
+
+.car-tag {
+  background-color: var(--primary-light);
+  color: var(--text-white);
+  font-weight: 600;
+}
+
+.car-tag.sale {
+  background-color: var(--danger-color);
+}
+
+.car-tag.new {
+  background-color: var(--success-color);
+}
+
+/* ===== PAGINATION ===== */
+.pagination a {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.pagination a:hover {
+  background-color: var(--bg-light);
+  color: var(--primary-color);
+}
+
+.pagination a.active {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  border-color: var(--primary-color);
+}
+
+/* ===== FILTERS ===== */
+.filter-card {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.filter-title {
+  color: var(--text-dark);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.range-slider .ui-slider-range {
+  background-color: var(--primary-color);
+}
+
+.range-slider .ui-slider-handle {
+  background-color: var(--primary-color);
+  border: 2px solid var(--card-bg);
+}
+
+/* ===== BREADCRUMBS ===== */
+.breadcrumbs {
+  color: var(--text-light);
+}
+
+.breadcrumbs a {
+  color: var(--primary-color);
+}
+
+/* ===== SECTION BACKGROUNDS ===== */
+.section-alt {
+  background-color: var(--bg-light);
+}
+
+.section-dark {
+  background-color: var(--primary-dark);
+  color: var(--text-white);
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonial-card {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+}
+
+.testimonial-author {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.testimonial-position {
+  color: var(--text-light);
+}
+
+.testimonial-rating {
+  color: var(--warning-color);
+}
+
+/* ===== PROFILE STYLES ===== */
+.profile-sidebar {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.profile-avatar {
+  background-color: var(--bg-light);
+  color: var(--primary-color);
+}
+
+.profile-menu-item {
+  color: var(--text-color);
+}
+
+.profile-menu-item:hover {
+  background-color: var(--bg-light);
+}
+
+.profile-menu-item.active {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+}
+
+.profile-menu-item.active i {
+  color: var(--text-white);
+}
+
+.profile-content {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.section-header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.info-group label {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.info-group p {
+  color: var(--text-dark);
+}
+
+.settings-group h3 {
+  color: var(--text-dark);
+}
+
+.danger-zone {
+  background-color: rgba(161, 85, 69, 0.1);
+}
+
+.danger-zone h3 {
+  color: var(--danger-color);
+}
+
+/* ===== DROPDOWN STYLES ===== */
+.dropdown-toggle {
+  color: var(--text-color);
+}
+
+.dropdown-toggle:hover {
+  background-color: var(--bg-light);
+}
+
+.dropdown-toggle i.fa-user-circle {
+  color: var(--primary-color);
+}
+
+.dropdown-menu {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.dropdown-menu a {
+  color: var(--text-color);
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--bg-light);
+  color: var(--primary-color);
+}
+
+.dropdown-menu a i {
+  color: var(--primary-color);
+}
+
+.dropdown-divider {
+  background-color: var(--border-color);
+}
+
+/* ===== TOAST STYLES ===== */
+.toast {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.toast-title {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.toast-message {
+  color: var(--text-color);
+}
+
+.toast-close {
+  color: var(--text-light);
+}
+
+.toast-success .toast-icon {
+  color: var(--success-color);
+}
+
+.toast-error .toast-icon {
+  color: var(--danger-color);
+}
+
+.toast-warning .toast-icon {
+  color: var(--warning-color);
+}
+
+.toast-info .toast-icon {
+  color: var(--info-color);
+}
+
+/* ===== CAR DETAIL PAGE ===== */
+.car-detail-section {
+  background-color: var(--bg-color);
+}
+
+.car-gallery {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.car-thumbnail.active {
+  border: 2px solid var(--primary-color);
+}
+
+.car-info {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.car-specs {
+  background-color: var(--bg-light);
+}
+
+.car-spec-item i {
+  color: var(--primary-color);
+}
+
+/* ===== TABS ===== */
+.tabs-nav a {
+  color: var(--text-color);
+  background-color: var(--bg-light);
+}
+
+.tabs-nav a.active {
+  color: var(--text-white);
+  background-color: var(--primary-color);
+}
+
+.tab-content {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+/* ===== CONTACT FORM ===== */
+.contact-form {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.contact-info {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+}
+
+.contact-info-item i {
+  color: var(--text-white);
+}
+
+/* ===== ABOUT PAGE ===== */
+.team-card {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.team-name {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.team-position {
+  color: var(--text-light);
+}
+
+.stats-item {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.stats-number {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.mobile-menu a {
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-menu a:hover {
+  background-color: var(--bg-light);
+  color: var(--primary-color);
+}
+
+/* ===== SEARCH BAR ===== */
+.search-bar {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.search-input {
+  background-color: var(--bg-light);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.search-input::placeholder {
+  color: var(--text-light);
+}
+
+.search-btn {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+}
+
+/* ===== ALERTS ===== */
+.alert {
+  border-radius: var(--border-radius);
+}
+
+.alert-success {
+  background-color: rgba(90, 112, 82, 0.1);
+  color: var(--success-color);
+  border: 1px solid var(--success-color);
+}
+
+.alert-danger {
+  background-color: rgba(161, 85, 69, 0.1);
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+}
+
+.alert-warning {
+  background-color: rgba(179, 150, 86, 0.1);
+  color: var(--warning-color);
+  border: 1px solid var(--warning-color);
+}
+
+.alert-info {
+  background-color: rgba(92, 122, 140, 0.1);
+  color: var(--info-color);
+  border: 1px solid var(--info-color);
+}
+
+/* ===== MODAL ===== */
+.modal-content {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color);
+}
+
+.modal-close {
+  color: var(--text-light);
+}
+
+.modal-close:hover {
+  color: var(--text-dark);
+}
+
+/* ===== LOADER ===== */
+.loader {
+  border-top-color: var(--primary-color);
+}
+
+/* ===== DARK MODE TOGGLE ===== */
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  z-index: 999;
+  border: none;
+  font-size: 20px;
+}
+
+.dark-mode-toggle:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ===== VINTAGE ADDITIONS ===== */
+.vintage-border {
+  border: 2px solid var(--border-color);
+  padding: 2px;
+  background-color: var(--card-bg);
+}
+
+.vintage-text {
+  font-family: 'Georgia', serif;
+  letter-spacing: 1px;
+}
+
+.vintage-badge {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  font-family: 'Georgia', serif;
+  padding: 4px 12px;
+  border-radius: var(--border-radius);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Add subtle texture to backgrounds */
+.texture-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233a3226' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+body {
+  background-color: var(--bg-color);
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233a3226' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+}

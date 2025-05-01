@@ -1,0 +1,53 @@
+<!-- Contact Modal -->
+<div id="contact-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Entre em Contato</h2>
+        <span id="contact-close" class="close">&times;</span>
+      </div>
+      
+      <div class="modal-body">
+        <!-- Contact Form -->
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Seu email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Telefone</label>
+            <input type="tel" id="phone" name="phone" placeholder="Seu telefone" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Assunto</label>
+            <input type="text" id="subject" name="subject" placeholder="Assunto da mensagem" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" placeholder="Sua mensagem" rows="5" required></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" id="contact-cancel" class="btn btn-secondary">Cancelar</button>
+            <button type="submit" id="contact-submit" class="btn btn-primary">Enviar Mensagem</button>
+          </div>
+        </form>
+        
+        <!-- Success Message -->
+        <div id="contact-success" style="display: none;">
+          <div class="success-message">
+            <i class="fas fa-check-circle"></i>
+            <h3>Mensagem Enviada!</h3>
+            <p>Obrigado por entrar em contato. Responderemos em breve.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

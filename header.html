@@ -1,0 +1,74 @@
+<header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="/placeholder.svg?height=50&width=150" alt="Luxury Cars">
+        </a>
+      </div>
+      
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cars.html">Carros</a></li>
+          <li><a href="about.html">Sobre</a></li>
+          <li><a href="contact.html">Contato</a></li>
+        </ul>
+      </nav>
+      
+      <div class="header-actions">
+        <button class="contact-button">
+          <i class="fas fa-envelope"></i> Contato
+        </button>
+        
+        <a href="profile.html" class="favorites-count">
+          <i class="far fa-heart"></i>
+          <span id="favorites-count">0</span>
+        </a>
+        
+        <div class="user-menu" id="user-menu">
+          <button class="user-button">
+            <i class="fas fa-user"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="login.html" class="login-link">Login</a>
+            <a href="register.html" class="register-link">Cadastro</a>
+            <a href="profile.html" class="profile-link" style="display: none;">Meu Perfil</a>
+            <a href="#" class="logout-link" style="display: none;">Sair</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Include Contact Modal -->
+  <div id="contact-modal-container"></div>
+  
+  <script>
+    // Load contact modal
+    fetch('/components/contact-modal.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('contact-modal-container').innerHTML = html;
+      });
+      
+    // Update user menu based on login status
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const loginLink = document.querySelector('.login-link');
+    const registerLink = document.querySelector('.register-link');
+    const profileLink = document.querySelector('.profile-link');
+    const logoutLink = document.querySelector('.logout-link');
+    
+    if (currentUser) {
+      loginLink.style.display = 'none';
+      registerLink.style.display = 'none';
+      profileLink.style.display = 'block';
+      logoutLink.style.display = 'block';
+      
+      // Add logout functionality
+      logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('currentUser');
+        window.location.reload();
+      });
+    }
+  </script>
